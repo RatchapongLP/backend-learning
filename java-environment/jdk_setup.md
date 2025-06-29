@@ -20,20 +20,20 @@ The folder should look like this:
     └── Contents
         ├── CodeResources
         ├── Home
-        │   ├── LICENSE -> legal/java.base/LICENSE
-        │   ├── README
-        │   ├── bin
-        │   │   ├── jar
-        │   │   ├── jarsigner
-        │   │   ├── java
-        │   │   ├── javac
-        │   │   ├── javadoc
-        │   │   └── ...
-        │   │   
-        │   ├── conf
-        │   ├── include
-        │   ├── ...
-        │   └── release
+        │   ├── LICENSE -> legal/java.base/LICENSE
+        │   ├── README
+        │   ├── bin
+        │   │   ├── jar
+        │   │   ├── jarsigner
+        │   │   ├── java
+        │   │   ├── javac
+        │   │   ├── javadoc
+        │   │   └── ...
+        │   │     
+        │   ├── conf
+        │   ├── include
+        │   ├── ...
+        │   └── release
         ├── Info.plist
         ├── MacOS
         └── _CodeSignature
