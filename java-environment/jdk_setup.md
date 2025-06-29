@@ -1,7 +1,7 @@
 # JDK setup steps
 
 ## For macOS, m-series chips
-### Manual method for individual user setup
+### Manual method for individual user setup (a bit unconventional for macOS)
 1. Download jdk tar.gz from a reliable source. In this tutorial, the link from ORACLE website is used - 
 `https://download.oracle.com/java/21/latest/jdk-21_macos-aarch64_bin.tar.gz`. You can follow the link to download or use CLI as:
 ```
@@ -39,7 +39,7 @@ The folder should look like this:
         └── _CodeSignature
 ```
 
-3. Set the environment variables permanently for every shell sessions.
+3. Set the environment variables permanently for all new shell sessions started.
 ```
 % nano ~/.zshrc
 
