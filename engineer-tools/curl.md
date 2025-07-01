@@ -52,12 +52,30 @@ to the destination.
     ...
     ```
 
-- `curl -d '<body>' <url>` or `curl --data '<body>' <url>` sends the body message with the request.  
-  - Set the default method as POST.
-  - Automatically sets the header `Content-Type: application/x-www-form-urlencoded` 
-  - It does not encode the `<body>` unless using `curl --data-urlencode '<body>' <url>` 
-  (`curl -d-urlencode` is not a valid form).
-  - `'` and `"` can be used to enclose the `<body>` with some difference.
+  - `curl -d '<body>' <url>` or `curl --data '<body>' <url>` sends the body message with the request.  
+    - Set the default method as POST.
+    - Automatically sets the header `Content-Type: application/x-www-form-urlencoded` 
+    - It does not encode the `<body>` unless using `curl --data-urlencode '<body>' <url>` 
+    (`curl -d-urlencode` is not a valid form).
+    - If the `<body>` is already encoded, `-d` should be used, e.g. 
+    ```
+    curl -d "name=John+Doe&city=Bangkok" <url>
+    ``` 
+    If the `<body>` is *not* encoded, `--data-urlencoded` should be used and the key-value pairs
+    should be separated, e.g.
+    ```
+    curl --data-urlencode "name=John Doe" \
+        --data-urlencode "city=Bangkok" \
+        <url>
+    ```
+    - `'` and `"` can be used to enclose the `<body>` with some difference. 
+    `'` makes the `body` as literals. `"` makes `body` as parameterized string.
+    ```
+    curl -d '{"name": "John Doe", "city": "Bangkok"}' <url>
+    
+    city="Bangkok"
+    curl -d "{\"name\": \"John Doe\", \"city\": \"$city\"}" <url>
+    ```
 
 - `curl -X <http method>`
 - `curl -u <username>:<password> `
