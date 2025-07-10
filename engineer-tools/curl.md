@@ -18,7 +18,7 @@
 - `curl -i <url>` displays headers in addition to the response body.
 - `curl -I <url>` displays only headers without the response body.
 
-- `curl -o <file name> <url>` or `curl --output <file name> <url>` redirects the response 
+- `curl -o <file name> <url>` or `curl --output <file name> <url>` saves the response 
 into the `<file name>` file.
     ```
     % curl --output jdk-21.tar.gz --location https://download.oracle.com/java/21/latest/jdk-21_macos-aarch64_bin.tar.gz
@@ -26,15 +26,14 @@ into the `<file name>` file.
     jdk-21.tar.gz
     ```
 
-- `curl -O <url>` also redirects the response but to the file with the name of the remote file.  
+- `curl -O <url>` also saves the response but to the file with the name of the remote file.  
     ```
-    % curl --location https://download.oracle.com/java/21/latest/jdk-21_macos-aarch64_bin.tar.gz
+    % curl -O https://download.oracle.com/java/21/latest/jdk-21_macos-aarch64_bin.tar.gz
     % ls
     jdk-21_macos-aarch64_bin.tar.gz
     ```
 
-- `curl -L <url>` or `curl --location <url>` auto-redirects the request, if provided by the server, 
-to the destination.
+- `curl -L <url>` or `curl --location <url>` auto-redirects the request to the destination as required by the server.
     ```
     % curl google.com
     <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
