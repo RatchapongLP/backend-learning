@@ -6,7 +6,7 @@
 - If the protocol is not specified, it will try to match one, by default with http.
     ```
     curl google.com --> curl http://google.com
-    curl ftp.xxx --> curl ftp://xxx
+    curl ftp.xxx --> curl ftp://ftp.xxx
     ```
 - Pagination is supported.
     ```
