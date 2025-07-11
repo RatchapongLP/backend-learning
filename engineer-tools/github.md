@@ -29,3 +29,7 @@ Type in the URL `https://github.com/RatchapongLP`, paste the PAT from step 2 and
 5. In a github repo local directory, try `git push origin`, a prompt should be launched.
 Just enter the macOS account password. Click `always allow` button. That's it.
 
+*For more information on github authentication, refer to this*
+[stackoverflow thread](
+https://stackoverflow.com/questions/68775869/message-support-for-password-authentication-was-removed
+)
