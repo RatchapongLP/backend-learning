@@ -8,7 +8,7 @@
   Object newArray = Array.newInstance(classObject, arrayLen);
 
 ```
-- Don’t require creating a new instance every invocation. Similar idea: Flyweight design pattern.
+- Don’t require creating a new instance every invocation. Conceptually similar to Flyweight design pattern.
 ```
   public static Boolean valueOf(boolean b) {
     return b ? Boolean.TRUE : Boolean.FALSE;
@@ -42,8 +42,12 @@
 
 ```
 - Actual return type need not exist yet when the class containing the method is written.  
-  Example: In JDBC (*service provider framework*), ``DriverManager`` contains a static method - ``DriverManager.getConnection`` (*service access API*) - that returns ``Connection`` (*service interface*).
-  The implementations of ``Connection`` can be created later by database vendors, e.g., MySQL, PostgreSQL, ORACLE that implement JDBC.
+  **Example**: In JDBC (*service provider framework*), `DriverManager` contains a static method - ``DriverManager.getConnection`` (*service access API*) - that returns ``Connection`` (*service interface*).
+  The implementations of `Connection` can be created later by database vendors, e.g., MySQL, PostgreSQL, ORACLE, which implement JDBC.
+  - *service interface* - the contract to be implemented, such as `Connection`.
+  - *service access API* - may allow clients to specify criteria for choosing an implementation, such as `DriverManager.getConnection`.
+  - *service provider interface* - a factory object, produces instances of *service interface*, such as `Driver`.
+  - *provider registration API* - providers use to register implementations, such as `DriverManager.registerDriver`.
 
 ## 🔍 Limitations:
 - Returned classes without public or protected constructors cannot be subclassed. Arguably this can be a blessing in disguise
@@ -51,6 +55,7 @@ because it encourages programmers to use composition instead of inheritance, and
 - They are hard for programmers to find. They do not stand out in API documentation.
 
 ## 🧪 Example:  
+```
 public class Color {
     private final int red, green, blue;
 
@@ -62,7 +67,6 @@ public class Color {
         return new Color(r, g, b);
     }
 }
-
-
+```
 
 Works great with enums and constants.
