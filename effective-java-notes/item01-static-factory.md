@@ -24,7 +24,7 @@ public class ClientApp {
 }
 ```
 
-## ✅ Why static factory methods?
+## ✅ Advantages
 
 1. Have semantic names corresponding to the distinct characteristic of each method, unlike overloaded constructors.
 ```
