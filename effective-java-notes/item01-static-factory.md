@@ -90,8 +90,3 @@ public class ClientApp {
 Arguably this can be a blessing in disguise because it encourages programmers to use composition instead of inheritance, 
 which is required for immutable types.
 - Static factory methods are hard to find in API documentation, as they do not stand out.
-
-
-## 💡 Common usages
-- Enums
-- Constant classes.
