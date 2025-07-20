@@ -1,30 +1,72 @@
 # 📘 Effective Java – Item 1: Consider static factory methods instead of constructors
 
-## ✅ Advantages of static factory methods:
-- Have semantic names corresponding to the distinct characteristic of each method, unlike overloaded constructors.
+## 🧪 Example:
 ```
-  // create or newInstance — Returns an instance that is described by its parameters.
-  // Guarantees that each call returns a new instance, for example:
-  Object newArray = Array.newInstance(classObject, arrayLen);
+public class Color {
+    private final int red, green, blue;
 
+    // Hidden constructor
+    private Color(int r, int g, int b) {
+        this.red = r; this.green = g; this.blue = b;
+    }
+
+    // Static factory method
+    public static Color ofRGB(int r, int g, int b) {
+        return new Color(r, g, b);
+    }
+}
+
+public class ClientApp {
+    public void doWork() {
+        Color turquoise = Color.ofRGB(64,224,208);
+        // More work
+    }
+}
 ```
-- Don’t require creating a new instance every invocation. Conceptually similar to Flyweight design pattern.
+
+## ✅ Why static factory methods?
+
+1. Have semantic names corresponding to the distinct characteristic of each method, unlike overloaded constructors.
+```
+  // Returns a new instance
+  Object newArray = Array.newInstance(classObject, arrayLen);
+  
+  // Returns an instance with the provided value
+  Integer num = Integer.valueOf(1);
+```
+
+2. Can return cached instances. Conceptually similar to the Flyweight design pattern.
 ```
   public static Boolean valueOf(boolean b) {
     return b ? Boolean.TRUE : Boolean.FALSE;
   }
-
 ```
-- Can return any subtype of the returning type. The actual return subtypes can be hidden (non-public).
-```
-  List<String> original = new ArrayList<>();
-  List<String> unmodifiable = Collections.unmodifiableList(original);
 
-  // Inside java.util.Collections
-  private static class UnmodifiableList<E> implements List<E>, RandomAccess { ... }
+3. The return types can be abstracted as interfaces or abstract classes. This has three main advantages.
+  - Unlimited number of return subtypes can be created.
+  - The return subtypes can be hidden from the outside (private).
+    ```
+      List<String> unmodifiable = Collections.unmodifiableList(original);
+    
+      // Actual returned subtype, defined inside java.util.Collections
+      private static class UnmodifiableList<E> implements List<E>, RandomAccess { ... }
+    ```
+  - Return subtypes can be non-existing at time of static factory methods creations.  
+    ```
+    // JDBC framework
+    Connection con = DriverManager.getConnection(...) 
+  
+    // Interface return type: Connection 
+    // The implementations of 'Connection' can be created later by the database vendors, e.g., MySQL, PostgreSQL, ORACLE, which implement JDBC.
+    ```
+    **Terminology**
+    - *service provider framework* - a framework that requires implementations to make it function, such as `JDBC`.
+    - *service interface* - the contract to be implemented, such as `Connection`.
+    - *service access API* - may allow clients to specify criteria for choosing an implementation, such as `DriverManager.getConnection`.
+    - *service provider interface* - a factory object, produces instances of *service interface*, such as `Driver`.
+    - *provider registration API* - providers use to register implementations, such as `DriverManager.registerDriver`.
 
-```
-- Actual return type can vary from call to call as a function of the input parameters.
+4. Can use input parameter to determine the actual return type.
 ```
   enum HugeValueEnum {
       VALUE_1, VALUE_2, ..., VALUE_100;
@@ -41,32 +83,15 @@
   EnumSet<SmallValueEnum> set = EnumSet.range(SmallValueEnum.VALUE_1, SmallValueEnum.VALUE_10);
 
 ```
-- Actual return type need not exist yet when the class containing the method is written.  
-  **Example**: In JDBC (*service provider framework*), `DriverManager` contains a static method - ``DriverManager.getConnection`` (*service access API*) - that returns ``Connection`` (*service interface*).
-  The implementations of `Connection` can be created later by database vendors, e.g., MySQL, PostgreSQL, ORACLE, which implement JDBC.
-  - *service interface* - the contract to be implemented, such as `Connection`.
-  - *service access API* - may allow clients to specify criteria for choosing an implementation, such as `DriverManager.getConnection`.
-  - *service provider interface* - a factory object, produces instances of *service interface*, such as `Driver`.
-  - *provider registration API* - providers use to register implementations, such as `DriverManager.registerDriver`.
 
-## 🔍 Limitations:
-- Returned classes without public or protected constructors cannot be subclassed. Arguably this can be a blessing in disguise
-because it encourages programmers to use composition instead of inheritance, and is required for immutable types.
-- They are hard for programmers to find. They do not stand out in API documentation.
 
-## 🧪 Example:  
-```
-public class Color {
-    private final int red, green, blue;
+## ⚠️ Downsides
+- The actual returned type cannot be subclassed. Because their constructors are `private`, and used internally by static methods. 
+Arguably this can be a blessing in disguise because it encourages programmers to use composition instead of inheritance, 
+which is required for immutable types.
+- Static factory methods are hard to find in API documentation, as they do not stand out.
 
-    private Color(int r, int g, int b) {
-        this.red = r; this.green = g; this.blue = b;
-    }
 
-    public static Color ofRGB(int r, int g, int b) {
-        return new Color(r, g, b);
-    }
-}
-```
-
-Works great with enums and constants.
+## 💡 Common usages
+- Enums
+- Constant classes.
