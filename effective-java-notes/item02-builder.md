@@ -69,7 +69,7 @@ public class ClienApp {
 ```
 
 ## ❓What problem does it solve?
-Creating instances with a large number of optional fields using regular techniques are not practical.
+Creating instances with a large number of optional fields using old techniques are not practical.
 See the below examples.
 1.  Using *constructors* are messy to implement. 
 For the client use, it is bug prone, and reduces readability.
@@ -198,8 +198,9 @@ public class ClientApp {
 ```
 Also, the *JavaBean* class is mutable due to the setters, not good for ensuring thread safety.
 
-But with *Builder* pattern, all the fields can be made `final`, and put the validation in the 
-class' constructor, by which the `build()` method calls.
+### But with *Builder* pattern:
+All the fields can be made `final`, and put the validation in the 
+class' constructor, which the `build()` method calls.
 ```
 // Builder Pattern
 public class NutritionFacts {
