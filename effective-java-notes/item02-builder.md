@@ -168,7 +168,7 @@ public class ClientApp {
     }
 }
 ```
-But it introduces new problems. If we want to validate all the fields, we have to create a new method just for it,
+But it introduces new problems. Firstly, if we want to validate all the fields, we have to create a new method just for it,
 which the user can forget to invoke.
 ```
 public class NutritionFacts {
@@ -196,6 +196,35 @@ public class ClientApp {
     }
 }
 ```
-Also the *JavaBean* class is mutable due to the setters, not good for ensuring thread safety.
+Also, the *JavaBean* class is mutable due to the setters, not good for ensuring thread safety.
 
+But with *Builder* pattern, all the fields can be made `final`, and put the validation in the 
+class' constructor, by which the `build()` method calls.
+```
+// Builder Pattern
+public class NutritionFacts {
+    // Final fields
 
+    public static class Builder {
+        ...
+    }
+
+    private NutritionFacts(Builder builder) {
+        servingSize  = builder.servingSize;
+        servings     = builder.servings;
+        calories     = builder.calories;
+        fat          = builder.fat;
+        sodium       = builder.sodium;
+        carbohydrate = builder.carbohydrate;
+        
+        validateAllFields();
+    }
+    
+     private void validateAllFields() {
+        if (this.servingSize < 1) throw new RuntimeException("servingSize cannot be less than 1");
+        if (this.servings < 1) throw new RuntimeException("servings cannot be less than 1");
+        if (this.calories < 0) throw new RuntimeException("calories cannot be less than 0");
+        ...
+    }
+}
+```
