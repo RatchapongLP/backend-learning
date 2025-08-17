@@ -20,3 +20,8 @@
    <br>
    **Use Case:**  
    For identifying information across systems and networks, not just within a single system.
+   <br>
+### 3. UDDI (Universal Description, Discovery, and Integration)
+   A universal registry that holds data of web services in form of XML. 
+   We can look up services' WSDL via this registry.  
+   
