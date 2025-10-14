@@ -14,7 +14,7 @@ Spring Boot further abstracts the existing configuration that the majority (roug
 of developers already adopting as a "convention" to an even more out-of-the-box version. It helps "bootstrapping"
 Spring applications to another level. For instance, a web container is bundled in the application so that the final jar 
 acts as a stand-alone app, no need for additional server to run and deploy the war files. Also, the dependencies are bundled
-as various groups to allow more convenient development.
+as various groups called 'meta' or 'parent' dependencies to allow more convenient development.
 
 ## Spring Tools for Eclipse (Version: 4.32.0.RELEASE)
 ### Initial setups for JavaSE-21
@@ -28,3 +28,23 @@ of "Compiler compliance level" to 21 -> Apply -> Apply and Close
 5. Package Explorer -> right-click the project directory -> Properties -> Resource ->
 Text file encoding -> select Other: -> choose UTF-8 from the dropdown menu -> Apply and Close
 
+## Steps to apply Spring Boot to a maven project
+### pom.xml
+1. Under `<project>`, add the Spring Boot starter as the project parent, enabling it to inherit 
+'opinionated' maven configurations from the parent:
+```
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.0.0-M3</version>
+</parent>
+```
+2. Under `<project>`, configure as JavaSE-21: 
+```
+  <properties>
+  	<java.version>21</java.version>
+  </properties>
+```
+Then save -> right click the project directory in the explorer -> Maven -> Update Project...
+See that the version trailing the 'JRE System Library' has changed from [JavaSE-17] to [JavaSE-21].
+This overrides the default version of the parent's maven configuration.
