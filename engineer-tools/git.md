@@ -13,3 +13,13 @@ git reset --hard HEAD~
 ```
 git commit -am "commit message"
 ```
+
+- Edit latest commit's message
+``` 
+git commit --amend -m "new commit message"
+```
+
+- Remove staged files (for untrack files added later to .gitignore)
+```
+git rm -r --cached <files>
+```
