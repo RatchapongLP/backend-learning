@@ -16,18 +16,6 @@ Spring applications to another level. For instance, a web container is bundled i
 acts as a stand-alone app, no need for additional server to run and deploy the war files. Also, the dependencies are bundled
 as various groups called 'meta' or 'parent' dependencies to allow more convenient development.
 
-## Spring Tools for Eclipse (Version: 4.32.0.RELEASE)
-### Initial setups for JavaSE-21
-1. Preferences -> Java -> Installed JREs -> Execution Environments -> JavaSE-21 on the left and JRE [21.0.8] [perfect match] 
--> Apply and Close
-2. Preferences -> Java -> Installed JREs -> Select JRE [21.0.8] (default) -> Apply -> Apply and Close
-3. Package Explorer -> right-click the project directory -> Build Path -> Java Build Path -> Libraries -> delete the old JRE 
--> Add Library -> JRE System Library -> Workspace default JRE (JRE [21.0.8]) -> Finish
-4. Package Explorer -> right-click the project directory -> Build Path -> Java Compiler -> Choose a drop down option
-of "Compiler compliance level" to 21 -> Apply -> Apply and Close
-5. Package Explorer -> right-click the project directory -> Properties -> Resource ->
-Text file encoding -> select Other: -> choose UTF-8 from the dropdown menu -> Apply and Close
-
 ## Steps to apply Spring Boot to a maven web application project 
 ### pom.xml
 1. Under `<project>`, add the Spring Boot starter as the project parent, enabling it to inherit 
@@ -69,7 +57,10 @@ This overrides the default version of the parent's maven configuration.
 - `logging`
 - `websocket`
 
-### Add the bootstrap class
+### Setting up JavaSE-21 in Spring Tools for Eclipse (Version: 4.32.0.RELEASE) 
+See **JRE 21 setting** in [java-environment/spring_tools.md](../java-environment/spring_tools.md)
+
+### Adding the bootstrap class
 1. Create a class with a `public static void main(String[] args)` method.
 2. Annotate the class with `@SpringBootApplication` to enable the class as the starting point.
 3. In the `main` method, add the following statement:
@@ -83,7 +74,7 @@ classpath: business, controller, services, dao, etc.)
 - runs the servlet container .
 - hosts the app at the default port.
 
-### Run Spring Boot application
+### Running Spring Boot application using the Spring Tools IDE
 1. Run the project in Spring Tools as Java application
 2. See the Spring ASCII art appears on the console, along with Tomcat and the application
 started. 
