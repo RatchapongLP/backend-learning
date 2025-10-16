@@ -17,7 +17,7 @@ acts as a stand-alone app, no need for additional server to run and deploy the w
 as various groups called 'meta' or 'parent' dependencies to allow more convenient development.
 
 ## Steps to apply Spring Boot to a maven web application project 
-### pom.xml
+### Step 1: pom.xml
 1. Under `<project>`, add the Spring Boot starter as the project parent, enabling it to inherit 
 'opinionated' maven configurations from the parent:
 ```
@@ -67,12 +67,10 @@ Spring Boot calls it "Bill of Materials", meaning that we don't have to worry ab
 just pick the version of the parent or combination, all the components jars have already been checked 
 and approved that they work well together.
 
-
-
 ### Setting up JavaSE-21 in Spring Tools for Eclipse (Version: 4.32.0.RELEASE) 
 See **JRE 21 setting** in [java-environment/spring_tools.md](../java-environment/spring_tools.md)
 
-### Adding the bootstrap class
+### Step 2: Adding the bootstrap class
 1. Create a class with a `public static void main(String[] args)` method.
 2. Annotate the class with `@SpringBootApplication` to enable the class as the starting point.
 3. In the `main` method, add the following statement:
@@ -86,7 +84,7 @@ classpath: business, controller, services, dao, etc.)
 - runs the servlet container .
 - hosts the app at the default port.
 
-### Running Spring Boot application using the Spring Tools IDE
+### Step 3: Running Spring Boot application using the Spring Tools IDE
 1. Run the project in Spring Tools as Java application
 2. See the Spring ASCII art appears on the console, along with Tomcat and the application
 started. 
@@ -97,9 +95,3 @@ the `/error` has not been set up yet. In the console, it will show
 2025-10-14T23:16:56.675+07:00  INFO 3376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-10-14T23:16:56.677+07:00  INFO 3376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 ```
-
-## Adding a controller
-A class that contains methods that will be execute when certain URL accesses are called to the application.
-In Spring (Spring MVC), the class has to be annotated with `@Controller`
-
-
