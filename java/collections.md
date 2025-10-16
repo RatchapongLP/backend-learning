@@ -24,3 +24,6 @@ to use wrapper classes (e.g., `Integer[]` instead of `int[]`).
 Arrays.asList(new int[]{1, 2, 3}); // This gives a List of one element: [{1, 2, 3}]
 Arrays.asList(new Integer[]{1, 2, 3}); // This gives a List of elements: [1, 2, 3]
 ```
+
+## `Arrays.asList()` vs `List.of()`
+[screen shot from stack overflow](images/arrays_aslist_vs_list_of.jpg)
