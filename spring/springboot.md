@@ -57,6 +57,18 @@ This overrides the default version of the parent's maven configuration.
 - `logging`
 - `websocket`
 
+**Note:** the Tomcat configurations that we usually need to do when running the servlet container 
+are already set and done by Spring Boot in merge with 'application configuration'.
+
+> ***Bill of Materials***<br>
+The dependencies here tell Maven which jars to download, but the version of the jars are specified and 
+configured by the parent.
+Spring Boot calls it "Bill of Materials", meaning that we don't have to worry about jars versions compatibilities.
+just pick the version of the parent or combination, all the components jars have already been checked 
+and approved that they work well together.
+
+
+
 ### Setting up JavaSE-21 in Spring Tools for Eclipse (Version: 4.32.0.RELEASE) 
 See **JRE 21 setting** in [java-environment/spring_tools.md](../java-environment/spring_tools.md)
 
