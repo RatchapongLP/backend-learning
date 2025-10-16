@@ -95,3 +95,90 @@ the `/error` has not been set up yet. In the console, it will show
 2025-10-14T23:16:56.675+07:00  INFO 3376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-10-14T23:16:56.677+07:00  INFO 3376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 ```
+
+## Ways to start a Spring Boot application
+1. ### Spring Initializr 
+    A webpage for fast setting up Spring Boot application at [start.spring.io](https://start.spring.io)<p>
+    In Spring Tools, go to File -> Import -> Maven -> Existing Maven Projects -> browse to unzipped, generated project file
+    
+    #### Result Included: 
+    1.1 Bootstrap class (as in step 2 earlier)<p>
+    1.2 mvnw - integrated Maven tool<p>
+    1.3 parent: spring-boot-starter-parent (as in step 1 earlier)<p>
+    1.4 properties: <java.version>21</java.version><p>
+    1.5 dependency: spring-boot-starter-test<p>
+    1.6 plugin: spring-boot-maven-plugin<p>
+
+
+2. Spring Boot CLI:
+   A Spring Boot command line tool documented at [spring-boot/cli](https://docs.spring.io/spring-boot/cli/index.html)
+   
+    #### Manual Installation Steps
+    2.1 Download tar.gz from the official page: 
+    ```
+    % cd ~/opt
+    % curl --output spring-boot-cli.tar.gz --location https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/3.5.6/spring-boot-cli-3.5.6-bin.tar.gz
+    ```
+    2.2 Extract the `spring-boot-cli.tar.gz` using this command:
+    ```
+    % tar -xvzf spring-boot-cli.tar.gz
+    ```
+    The folder should look like this:
+    ```
+    spring-3.5.6
+    ├── INSTALL.txt
+    ├── LICENCE.txt
+    ├── bin
+    │   ├── spring
+    │   └── spring.bat
+    ├── legal
+    │   └── open_source_licenses.txt
+    ├── lib
+    │   └── spring-boot-cli-3.5.6.jar
+    └── shell-completion
+    ├── bash
+    │   └── spring
+    └── zsh
+    └── _spring
+    ```
+   2.3 Even though the INSTALL.TXT says that we don't need to set the environment variable, 
+    it seems like I do. 
+    ```
+    % cat opt/spring-3.5.6/INSTALL.txt
+   
+     ...
+   
+    Environment Variables
+    ---------------------
+    No specific environment variables are required to run the CLI, however, you may want to
+    set SPRING_HOME to point to a specific installation. You should also add SPRING_HOME/bin
+    to your PATH environment variable. 
+    ```
+    Follow these steps for successful installation.
+    ```
+    % nano ~/.zshrc
+    
+    // Modify the config file after maven_setup.md tutorial
+    export JAVA_HOME="$HOME/opt/jdk-21.0.7/Contents/Home"
+    export MAVEN_HOME="$HOME/opt/apache-maven-3.9.10"
+    export SPRING_HOME="$HOME/opt/spring-3.5.6"
+    export PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$SPRING_HOME/bin:$PATH"
+    
+    // Save the file and exit
+    [Ctrl] + [O]
+    [Return]
+    [Ctrl] + [X]
+    ```
+   2.4 Start a new shell (`cmd + N`) and check:
+    ```
+    ~ % echo $SPRING_HOME
+    /Users/ratchapong/opt/spring-3.5.6
+   
+    ~ % which spring
+    /Users/ratchapong/opt/spring-3.5.6/bin/spring
+
+    ~ % spring --version
+    Spring CLI v3.5.6
+    ```
+   
+3. STS IDE
