@@ -110,7 +110,7 @@ the `/error` has not been set up yet. In the console, it will show
     1.6 plugin: spring-boot-maven-plugin<p>
 
 
-2. Spring Boot CLI:
+2. ### Spring Boot CLI:
     A Spring Boot command line tool documented at [spring-boot/cli](https://docs.spring.io/spring-boot/cli/index.html)
    
     #### Manual Installation Steps
@@ -214,4 +214,7 @@ the `/error` has not been set up yet. In the console, it will show
     <description>Demo project for Spring Boot</description>
     ```
    
-3. STS IDE
+3. ### STS IDE
+    The most simple way if Spring Tools IDE is available.<p>
+    Go with: File -> New -> Spring Starter Project -> edit specifications as in the former two ways<p>
+    Then, the project is created, opened in Package Explorer, and ready for development in the IDE
