@@ -103,7 +103,7 @@ the `/error` has not been set up yet. In the console, it will show
     
     #### Result Included: 
     1.1 Bootstrap class (as in step 2 earlier)<p>
-    1.2 mvnw - integrated Maven tool<p>
+    1.2 mvnw, mvnw.cmd - integrated Maven tool<p>
     1.3 parent: spring-boot-starter-parent (as in step 1 earlier)<p>
     1.4 properties: <java.version>21</java.version><p>
     1.5 dependency: spring-boot-starter-test<p>
@@ -111,7 +111,7 @@ the `/error` has not been set up yet. In the console, it will show
 
 
 2. Spring Boot CLI:
-   A Spring Boot command line tool documented at [spring-boot/cli](https://docs.spring.io/spring-boot/cli/index.html)
+    A Spring Boot command line tool documented at [spring-boot/cli](https://docs.spring.io/spring-boot/cli/index.html)
    
     #### Manual Installation Steps
     2.1 Download tar.gz from the official page: 
@@ -141,7 +141,7 @@ the `/error` has not been set up yet. In the console, it will show
     └── zsh
     └── _spring
     ```
-   2.3 Even though the INSTALL.TXT says that we don't need to set the environment variable, 
+    2.3 Even though the INSTALL.TXT says that we don't need to set the environment variable, 
     it seems like I do. 
     ```
     % cat opt/spring-3.5.6/INSTALL.txt
@@ -169,7 +169,7 @@ the `/error` has not been set up yet. In the console, it will show
     [Return]
     [Ctrl] + [X]
     ```
-   2.4 Start a new shell (`cmd + N`) and check:
+    2.4 Start a new shell (`cmd + N`) and check:
     ```
     ~ % echo $SPRING_HOME
     /Users/ratchapong/opt/spring-3.5.6
@@ -179,6 +179,39 @@ the `/error` has not been set up yet. In the console, it will show
 
     ~ % spring --version
     Spring CLI v3.5.6
+    ```
+   
+    #### Example
+    Initialize a Java project into a Tennis directory (non-existing) with the following specifications:
+
+    - language = Java
+    - Spring Boot version = 3.5.6
+    - packaging = jar
+    - build = maven
+    - artifactId = tennis
+    - groupId = com.ryoma
+    - version = 1.0.0
+    - dependencies = spring-boot-starter-web, spring-boot-starter-data-jpa 
+
+    with the Spring CLI as:
+    ```
+    % spring init -a tennis -g com.ryoma -v 1.0.0 -j 21 -l java -p jar -b 3.5.6 --build maven -d=web,jpa Tennis
+    ```
+   
+    #### Result Included:
+    1.1 Bootstrap class at `Tennis/src/main/java/com/ryoma/tennis/DemoApplication.java`<p>
+    1.2 mvnw, mvnw.cmd<p>
+    1.3 parent: spring-boot-starter-parent<p>
+    1.4 properties: <java.version>21</java.version><p>
+    1.5 dependencies: spring-boot-starter-test, spring-boot-starter-web, spring-boot-starter-data-jpa<p>
+    1.6 plugin: spring-boot-maven-plugin<p>
+    with the following project's information in pom.xml:
+    ```
+    <groupId>com.ryoma</groupId>
+    <artifactId>tennis</artifactId>
+    <version>1.0.0</version>
+    <name>demo</name>
+    <description>Demo project for Spring Boot</description>
     ```
    
 3. STS IDE
