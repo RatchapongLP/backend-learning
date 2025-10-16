@@ -26,4 +26,5 @@ Arrays.asList(new Integer[]{1, 2, 3}); // This gives a List of elements: [1, 2, 
 ```
 
 ## `Arrays.asList()` vs `List.of()`
+A practical summary of an answer in a [Stack Overflow thread](https://stackoverflow.com/questions/46579074/what-is-the-difference-between-list-of-and-arrays-aslist):
 <img src="images/arrays_aslist_vs_list_of.jpg" width="450">
