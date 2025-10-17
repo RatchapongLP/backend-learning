@@ -16,6 +16,9 @@ Spring applications to another level. For instance, a web container is bundled i
 acts as a stand-alone app, no need for additional server to run and deploy the war files. Also, the dependencies are bundled
 as various groups called 'meta' or 'parent' dependencies to allow more convenient development.
 
+
+
+
 ## Steps to apply Spring Boot to a maven web application project 
 ### Step 1: pom.xml
 1. Under `<project>`, add the Spring Boot starter as the project parent, enabling it to inherit 
@@ -70,6 +73,7 @@ and approved that they work well together.
 ### Setting up JavaSE-21 in Spring Tools for Eclipse (Version: 4.32.0.RELEASE) 
 See **JRE 21 setting** in [java-environment/spring_tools.md](../java-environment/spring_tools.md)
 
+
 ### Step 2: Adding the bootstrap class
 1. Create a class with a `public static void main(String[] args)` method.
 2. Annotate the class with `@SpringBootApplication` to enable the class as the starting point.
@@ -84,8 +88,32 @@ classpath: business, controller, services, dao, etc.)
 - runs the servlet container .
 - hosts the app at the default port.
 
+
 ### Step 3: Running Spring Boot application using the Spring Tools IDE
-1. Run the project in Spring Tools as Java application
+
+1. Run the project with one of the three methods:
+
+#### Manual Packaging and Running
+- Package the Spring Boot application as a jar file using the integrated Maven tool in the 
+terminal in the project directory:
+```
+% ./mvnw clean install
+```
+- Retrieve the jar file at `<project_directory>/target/<artifactId>-<version>.jar`
+- Run on any machine with the required JRE version using:
+```
+% java -jar <jar_name>
+```
+
+#### Spring Boot Maven Plugin
+In the terminal, in the project directory, use the Maven CLI:
+```
+./mvnw spring-boot:run
+```
+
+#### Spring Tools GUI
+Go to Run menu -> Run As -> Java Application
+
 2. See the Spring ASCII art appears on the console, along with Tomcat and the application
 started. 
 3. Check http://localhost:8080 (default port for Tomcat) to see Whitelabel Error Page because 
