@@ -9,6 +9,8 @@ but can also be used in Java SE (Standard Edition) environments.
 ### JPA Annotations
 - `@Entity`: used at DTO classes that are to be mapped to tables in relational databases
 - `@Id`: used at DTO fields that are mapped to primary-keys in tables
+- `@ManyToOne`: used at DTO fields that are mapped to foreign keys in the tables of the "many" entity 
+that points to the primary key of the "one" entity's table.
 
 ## Spring Data JPA 
 - Enables out-of-the-box repository class creation. No need for implementing basic CRUD methods.
