@@ -97,7 +97,7 @@ type of the initializer expression assigned to the variable.
 
 #### `byte`
 - $8$-bit signed integer
-- The leftmost bit - a.k.a. most significant bit (MSB) - determines whether the number is positive or negative.
+- The leftmost bit (bit #8) - a.k.a. most significant bit (MSB) - determines whether the number is positive or negative.
   If MSB is $0$, the number is positive or zero. If MSB is $1$, the number is negative.
 - The rest of $7$ bits makes up the number's absolute value.
 - The maximum value is `Byte.MAX_VALUE` $= 2^{7}-1= 127$
@@ -120,6 +120,27 @@ type of the initializer expression assigned to the variable.
 - Follows MSB principle
 - The maximum value is `Long.MAX_VALUE` $= 2^{63}-1= 9,223,372,036,854,775,807$ (quintillion - $6$ commas)
 - The minimum value is `Long.MIN_VALUE` $= -2^{63}= -9,223,372,036,854,775,808$
+
+#### `float`
+- $32$-bit single-precision floating-point number
+- Follows MSB principle
+- $23$ rightmost bits (bit $22$-$0$) represent the fractional part of the numbers (Significand/Mantissa).
+- $8$ in-between bits (bit $30$-$23$) represent the exponent of the number.
+- The maximum value is `Float.MAX_VALUE` $= 3.4028235\times 10^{38}$
+- The minimum value is `-Float.MAX_VALUE` $= -3.4028235\times 10^{38}$
+- The smallest positive value is `Float.MIN_VALUE` $=2^{-149} \approx 1.4\times 10^{-45}$
+
+#### `double`
+- $64$-bit double-precision floating-point number
+- $52$ rightmost bits (bit $51$-$0$) represent the fractional part of the numbers (Significand/Mantissa).
+- $11$ in-between bits (bit $62$-$52$) represent the exponent of the number.
+- The maximum value is `Double.MAX_VALUE` $= 1.7976931348623157\times 10^{308}$
+- The minimum value is `-Double.MAX_VALUE` $= -1.7976931348623157\times 10^{308}$
+- The smallest positive value is `Double.MIN_VALUE` $=2^{-1074} \approx 4.94065645841247\times 10^{-324}$
+
+#### `char`
+
+#### `boolean`
 
 
 
