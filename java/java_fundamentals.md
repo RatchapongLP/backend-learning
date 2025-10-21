@@ -96,23 +96,43 @@ type of the initializer expression assigned to the variable.
 - **Boolean:** `boolean`
 
 #### `byte`
-- $8$-bit signed integer
+- $8$-bit signed two's complement integer
 - The leftmost bit (bit #8) - a.k.a. most significant bit (MSB) - determines whether the number is positive or negative.
   If MSB is $0$, the number is positive or zero. If MSB is $1$, the number is negative.
 - The rest of $7$ bits makes up the number's absolute value.
+- For positive numbers, the $7$ bits are interpreted straightforwardly.
+- For negative numbers, the $7$ bits are stored in a special way of signed two's complement.
+  1. Take the absolute value of the number.
+  2. Convert this absolute value to its binary representation.
+  3. Flip all the bits (change 0s to 1s and 1s to 0s) – this is called the one's complement.
+  4. Add 1 to the result.
+
+  Example, to find the two's complement of -5: 
+  1. Absolute value: 5
+  2. Binary of 5: 00000101
+  3. One's complement (flip bits): 11111010
+  4. Add 1: 11111011.
+```
+jshell> Integer.toBinaryString(5)
+$1 ==> "101"
+
+jshell> Integer.toBinaryString(-5)
+$2 ==> "11111111111111111111111111111011"
+```
+
 - The maximum value is `Byte.MAX_VALUE` $= 2^{7}-1= 127$
 - The minimum value is `Byte.MIN_VALUE` $= -2^{7}= -128$
 - No actual literals, need casting: `(byte) 0x0A` for `10`
 
 #### `short`
-- $16$-bit signed integer
+- $16$-bit signed two's complement integer
 - Follows MSB principle
 - The maximum value is `Short.MAX_VALUE` $= 2^{15}-1= 32,767$
 - The minimum value is `Short.MIN_VALUE` $= -2^{15}= -32,768$
 - No actual literals, need casting: `(short) 0123` for `83`
 
 #### `int`
-- $32$-bit signed integer
+- $32$-bit signed two's complement integer
 - Follows MSB principle
 - The maximum value is `Integer.MAX_VALUE` $= 2^{31}-1= 2,147,483,647$ (billions)
 - The minimum value is `Integer.MIN_VALUE` $= -2^{31}= -2,147,483,648$
@@ -123,7 +143,7 @@ type of the initializer expression assigned to the variable.
 - Hexadecimal literals: `0x0` for $0$, `0xFF` for $255$, `0x7fff_ffff` for $2^{31}-1$ (can use both `x` or `X`)
 
 #### `long`
-- $64$-bit signed integer
+- $64$-bit signed two's complement integer
 - Follows MSB principle
 - The maximum value is `Long.MAX_VALUE` $= 2^{63}-1= 9,223,372,036,854,775,807$ (quintillion - $6$ commas)
 - The minimum value is `Long.MIN_VALUE` $= -2^{63}= -9,223,372,036,854,775,808$
@@ -214,19 +234,79 @@ to the largest-capacity type of the expression.
 ```
 double d = 10;
 int i = 5;
-var c = d * i
+var c = d * i 
+// c becomes a double
 ```
 
+
+
 ### Arrays
+- Array's size is static. Once created, its size cannot be changed.
+- Cannot be cast from one type of array to another.
+- Array Initializer is a shorthand for creating an array at the declaration point:
+```
+int[] nums = {1, 2, 3};
+```
+- For multi-dimension array initialization, one must specify the size of the first 
+dimension at least. This allows multi-width columns or jagged array.
+```
+int[][] nums = new int[2][];
+nums[0] = new int[4];
+nums[1] = new int[3];
+// nums = { {0, 0, 0, 0}, {0, 0, 0} }
+```
+
+
 
 ### Variable Memory Allocation
 - Primitive types are allocated with some space of the type's size 
 instantly at the variable declaration.
-- Arrays, Strings and Objects are allocated with some space of a reference
+- Arrays, Strings and Objects are allocated with space of the reference only, 
 at the variable declaration, then the actual space for the objects are allocated
-later when the variable is instantiated of initialized. 
+later when the variable is instantiated or initialized. 
 
 
+
+### Operators
+#### Arithmetic Operators
+- Binary Arithmetic Operators (require two operands): `+`, `-`, `*`, `/`, and `%`
+- Unary Arithmetic Operators (require one operand): `+`, `-`, `++`, `--` 
+(post and pre increment/decrement), and `!`
+
+#### The Equality and Relational Operators
+- `==`, `!=`, `>`, `>=`, `<`, and `<=`
+- The Type Comparison Operator `instanceof` (`null` is not an instance of any types)
+
+#### The Conditional Operators
+- `&&` and `||`
+
+#### Bitwise Operators
+- Performs a logical operation on each corresponding bit of two operands.
+- Mimics boolean as 1 for `true` and 0 for `false`.
+- **Caveat**: all the bit wise operators automatically promote `byte` and `short` to `int` before
+  performing operations.<br>
+    ##### Operators
+- Bitwise AND (&): If both bits are 1, the result bit is 1; otherwise, it's 0.
+- Bitwise OR (|): If at least one bit is 1, the result bit is 1; otherwise, it's 0.
+- Bitwise XOR (^) (exclusive OR): If the bits are different, the result bit is 1; otherwise, it's 0.
+- Bitwise NOT (~): Flips the bits of a single operand. Every 0 becomes 1, and every 1 becomes 0.
+```
+byte a = 0b1010;
+byte b = 0b1001;
+// a & b = 0b1000 = 8
+// a | b = 0b1011 = 11
+// a ^ b = 0b0011 = 3
+
+// ~a != 0b0101  
+// ~a = 0b1111_0101 = -11
+
+// TODO: why these two methods of finding the value of negative integer from two's complement representation
+yield the same results?
+method 1: "minus 1 from a, negating, interpret value, then add minus sign" (reverse engineering storing negatives from positives)
+method 2: "negating, adding 1, then interpret value" (chatGPT)
+```
+
+#### Augmented Assignment Operators:
 
 
 ### Access Modifier
