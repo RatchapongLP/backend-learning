@@ -139,6 +139,10 @@ type of the initializer expression assigned to the variable.
 - The smallest positive value is `Double.MIN_VALUE` $=2^{-1074} \approx 4.94065645841247\times 10^{-324}$
 
 #### `char`
+- Stores a single character
+- $16$-bit unsigned integer under the hood, corresponding to Unicode code units
+- The maximum value is `Character.MAX_VALUE` $=$ `\uffff` $= 2^{16}-1 = 65,535$
+- The minimum value is `Character.MIN_VALUE` $=$ `\u0000` $= 0$
 
 #### `boolean`
 
