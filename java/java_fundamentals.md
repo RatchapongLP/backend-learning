@@ -171,5 +171,63 @@ type of the initializer expression assigned to the variable.
 - Compilers map boolean values to JVM type of int.
 - Literals: `true` and `false`
 
+#### Strongly static typing
+- The declared variable's type and the assigned value's type should be *compatible*.
+- Typically, smaller-capacity source can be converted to larger-capacity destination.
+```
+// This is fine because int can be converted to double
+int i = 123;
+double d = i; 
+
+// This is not fine
+double d = 10; 
+int i = d;
+```
+- For smaller-capacity destination, it is incompatible and therefore needs casting.
+
+#### Casting
+- An unary operator used for explicit type conversion
+- Has the syntax of `(<destination_type>) <source>`
+- Java can squeeze certain sources into the destination to make it work even if 
+it is not ideal, causing **lossy conversion**.
+- Throws an exception at runtime when the runtime cannot 'make it work'
+```
+// Lossy conversion, works but not accurate
+double d = 10.5;
+int i = (int) d; // Get i = 10
+```
+
+#### Precision Loss
+- Sometimes, the assigned source are detected as compatible with the destination
+but it actually is **not**.
+```
+int i = 3 / 2; 
+double d = 3 / 2; 
+
+// i = d = 1 because 3 / 2 is an (int / int) which cannot hold fractions, 
+resulting in a 1
+```
+
+#### Automatic Type Promotion
+- In an expression with multiple types, the smaller-capacity types are all converted
+to the largest-capacity type of the expression.
+```
+double d = 10;
+int i = 5;
+var c = d * i
+```
+
+### Arrays
+
+### Variable Memory Allocation
+- Primitive types are allocated with some space of the type's size 
+instantly at the variable declaration.
+- Arrays, Strings and Objects are allocated with some space of a reference
+at the variable declaration, then the actual space for the objects are allocated
+later when the variable is instantiated of initialized. 
+
+
+
+
 ### Access Modifier
 ### static vs instance
