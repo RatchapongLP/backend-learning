@@ -102,24 +102,34 @@ type of the initializer expression assigned to the variable.
 - The rest of $7$ bits makes up the number's absolute value.
 - The maximum value is `Byte.MAX_VALUE` $= 2^{7}-1= 127$
 - The minimum value is `Byte.MIN_VALUE` $= -2^{7}= -128$
+- No actual literals, need casting: `(byte) 0x0A` for `10`
 
 #### `short`
 - $16$-bit signed integer
 - Follows MSB principle
 - The maximum value is `Short.MAX_VALUE` $= 2^{15}-1= 32,767$
 - The minimum value is `Short.MIN_VALUE` $= -2^{15}= -32,768$
+- No actual literals, need casting: `(short) 0123` for `83`
 
 #### `int`
 - $32$-bit signed integer
 - Follows MSB principle
 - The maximum value is `Integer.MAX_VALUE` $= 2^{31}-1= 2,147,483,647$ (billions)
 - The minimum value is `Integer.MIN_VALUE` $= -2^{31}= -2,147,483,648$
+- Decimal literals: `0` for $0$, `1101` for $1,101$ 
+- Literal separator: `_` anywhere but at the start and the end, e.g., `1_101` for $1,101$
+- Octal literals: `00` for $0$, `01` for $1$, `010` for $8$
+- Binary literals: `0b0` for $0$, `0b1010` for $10$, `0b10_1010` for $42$, `0b1111_1111_1111_1111` for $65,535$ (can use both `b` or `B`)
+- Hexadecimal literals: `0x0` for $0$, `0xFF` for $255$, `0x7fff_ffff` for $2^{31}-1$ (can use both `x` or `X`)
 
 #### `long`
 - $64$-bit signed integer
 - Follows MSB principle
 - The maximum value is `Long.MAX_VALUE` $= 2^{63}-1= 9,223,372,036,854,775,807$ (quintillion - $6$ commas)
 - The minimum value is `Long.MIN_VALUE` $= -2^{63}= -9,223,372,036,854,775,808$
+- Literal separator, decimal, octal, binary, and hexadecimal literals are the same as `int` but..
+- Long literals have `L` or `l` trailing.
+- Hexadecimal literal: `0x7fff_ffff_ffff_ffffL` for $2^{63}-1$
 
 #### `float`
 - $32$-bit single-precision floating-point number
@@ -129,6 +139,9 @@ type of the initializer expression assigned to the variable.
 - The maximum value is `Float.MAX_VALUE` $= 3.4028235\times 10^{38}$
 - The minimum value is `-Float.MAX_VALUE` $= -3.4028235\times 10^{38}$
 - The smallest positive value is `Float.MIN_VALUE` $=2^{-149} \approx 1.4\times 10^{-45}$
+- Literal separator and Exponential notation literal are the same as `double` but..
+- Float literals have `F` or `f` trailing
+- Cast hexadecimal literal: `0x0` for $0.0$, `0x0f` for $1f.0$
 
 #### `double`
 - $64$-bit double-precision floating-point number
@@ -137,16 +150,26 @@ type of the initializer expression assigned to the variable.
 - The maximum value is `Double.MAX_VALUE` $= 1.7976931348623157\times 10^{308}$
 - The minimum value is `-Double.MAX_VALUE` $= -1.7976931348623157\times 10^{308}$
 - The smallest positive value is `Double.MIN_VALUE` $=2^{-1074} \approx 4.94065645841247\times 10^{-324}$
+- Double literals have `D` or `d` trailing.
+- Literal separator: `_` as in `int` but also not allowed near the decimal point, e.g., `123_0.1_2_0` for $1230.12$
+- Exponential notation literal: `123_0.1_2_0E-02` for $12.3012$ (can use both `E` or `e`)
+- Cast hexadecimal literal: `0x0` for $0.0$, `0x0d` for $13.0$
 
 #### `char`
 - Stores a single character
 - $16$-bit unsigned integer under the hood, corresponding to Unicode code units
 - The maximum value is `Character.MAX_VALUE` $=$ `\uffff` $= 2^{16}-1 = 65,535$
 - The minimum value is `Character.MIN_VALUE` $=$ `\u0000` $= 0$
+- Character literal: `'a'`
+- Unicode escape sequence: `'\u0000'` (must have four hexadecimal digits)
+- Escape sequences: `'\n'` for 'newline', `'\t'` for 'tab', `'\'''` for single quote, `'\\'` for backslash
+- Integer literals (representing Unicode value):  `65` for `'a'`, `0101` for `'a'`, `0x41` for `'a'`
 
 #### `boolean`
-
-
+- Two possible values: `true` and `false`
+- JVM encodes boolean array components using $1$ to represent `true` and $0$ to represent `false`. 
+- Compilers map boolean values to JVM type of int.
+- Literals: `true` and `false`
 
 ### Access Modifier
 ### static vs instance
