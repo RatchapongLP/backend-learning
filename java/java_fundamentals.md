@@ -414,5 +414,20 @@ result = switch (a) {
 System.out.println("The result is " + result);
 ```
 
+
+### For-Each Loop
+- Has the following syntax:
+```
+for (Type elementVariable : iterableOrArray) {
+    // Stuff
+}
+```
+- Can be used with `Iterable` objects or arrays.
+- Internally uses an `Iterator` for `Iterable` objects.
+- Does not allow modifying the `Collection` object during iteration, or else it throws `ConcurrentModificationException`. 
+For such operations, use an Iterator explicitly instead.
+
+
+
 ### Access Modifier
 ### static vs instance
