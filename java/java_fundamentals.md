@@ -270,15 +270,15 @@ later when the variable is instantiated or initialized.
 ### Operators
 #### Arithmetic Operators
 - Binary Arithmetic Operators (require two operands): `+`, `-`, `*`, `/`, and `%`
-- Unary Arithmetic Operators (require one operand): `+`, `-`, `++`, `--` 
-(post and pre increment/decrement), and `!`
+- Unary Arithmetic Operators (require one operand): `!`, `+`, `-`, `++`, and `--` 
+(post/pre increment/decrement or postfix/prefix operators)
 
 #### The Equality and Relational Operators
 - `==`, `!=`, `>`, `>=`, `<`, and `<=`
-- The Type Comparison Operator `instanceof` (`null` is not an instance of any types)
+- `instanceof` - type comparison operator  (`null` is not an instance of any types)
 
 #### The Conditional Operators
-- `&&` and `||`
+- `&&`, `||`, and `?:`
 
 #### Bitwise Operators
 - Performs a logical operation on each corresponding bit of two operands.
@@ -355,8 +355,64 @@ jshell> -8 >>> 2
 $10 ==> 1073741822
 ```
 
-#### Augmented Assignment Operators:
+#### Assignment Operators:
+- `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `^=`, `|=`, `<<=`, `>>=`, `>>>=`
 
+
+
+### Blocks and Variable Scoping
+- Variables exist from where they are declared and end when the end of scope is reached.
+- Scopes are bound by curly braces `{}` or blocks.
+```
+public static void main(String[] args) {
+  {
+    int i = 1;
+  }
+  System.out.println(i); // This does not compile
+}
+```
+
+
+#### Switch statement
+- Regular switch statement: 
+  - need `break` to stop fall-through.
+  - cases can be grouped together.
+```
+int a = 3;
+switch (a) {
+  case 0:
+    System.out.println("a == 0");
+    break;  
+  case 1:
+    System.out.println("a == 1");
+    break;  
+  case 2, 3, 4:
+    System.out.println("1 < a < 5");
+    break;  
+  default:
+    System.out.println("other");
+}
+```
+- Switch expression: 
+  - `->` eliminates the need for explicit `break`, preventing bugs.
+  - `yield` for returning values in case blocks.
+```
+int a = 3;
+String result;
+result = switch (a) {
+    case 0 -> {
+        result = "a == " + 0;
+        yield result;
+    }
+    case 1 -> {
+        result = "a == " + 1;
+        yield result;
+    }
+    case 2, 3, 4 -> "1 < a < 5";
+    default -> "other";
+};
+System.out.println("The result is " + result);
+```
 
 ### Access Modifier
 ### static vs instance
