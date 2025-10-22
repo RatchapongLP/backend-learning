@@ -303,7 +303,56 @@ byte b = 0b1001;
 // TODO: why these two methods of finding the value of negative integer from two's complement representation
 yield the same results?
 method 1: "minus 1 from a, negating, interpret value, then add minus sign" (reverse engineering storing negatives from positives)
-method 2: "negating, adding 1, then interpret value" (chatGPT)
+method 2: "negating, adding 1, interpret value as a positive integral, then add a minus sign" (chatGPT)
+
+proof:
+case 1: 10...0 (n number of 0)
+  method 1: 01...10 -> 10...01 -> (binary stored of a negative) -> 01...10 is the positive -> 2^n - 2 -> 2 - 2^n
+  method 2: 01...1 -> 10...0 -> looping
+```
+
+#### Bit Shift Operators
+- `<number> << <shift_positions>` - signed left shift: shift the binary pattern of the `<number>` 
+to the left for `<shift_positions>`, replacing vacant positions on the right with `0`.
+```
+jshell> Integer.toBinaryString(8)
+$1 ==> "1000"
+
+jshell> Integer.toBinaryString(8 << 2)
+$2 ==> "100000"
+```
+- `<number> >> <shift_positions>` - signed right shift: shift the binary pattern of the `<number>`
+to the right for `<shift_positions>`, replacing vacant positions on the left with the sign bit.
+```
+jshell> Integer.toBinaryString(8 >> 2)
+$3 ==> "10"
+
+jshell> Integer.toBinaryString(-8)
+$4 ==> "11111111111111111111111111111000"
+
+jshell> Integer.toBinaryString(-8 >> 2)
+$5 ==> "11111111111111111111111111111110"
+```
+- `<number> >>> <shift_positions>` - unsigned right shift: shift the binary pattern of the `<number>` 
+to the right for `<shift_positions>`, replacing vacant positions on the left with `0`.
+```
+jshell> Integer.toBinaryString(-8 >>> 2)
+$6 ==> "111111111111111111111111111110" 
+
+// Only 30 digits is displayed above
+// Check if the replacing digits were 0 or not
+
+jshell> String s = "00" + Integer.toBinaryString(-8 >>> 2)
+s ==> "00111111111111111111111111111110"
+
+jshell> Integer.parseInt(s, 2) == (-8 >>> 2)
+$8 ==> true
+
+jshell> Integer.parseInt(s, 2)
+$9 ==> 1073741822
+
+jshell> -8 >>> 2
+$10 ==> 1073741822
 ```
 
 #### Augmented Assignment Operators:
