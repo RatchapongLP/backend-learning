@@ -441,5 +441,33 @@ be of any reference type.
 
 
 
+### Variable Shadowing
+- A variable declared in an inner scope has the same name as a variable declared in an outer scope. 
+- The inner variable "shadows" or hides the outer variable, making the outer variable temporarily 
+inaccessible within that specific inner scope.
+- For example, subclass - inner scope & superclass - outer scope, method - inner scope & instance - outer scope
+
+
+
+### `this` keyword
+- Can mean two things: a class's constructor and an instance of a class
+- As a constructor, `this(<constructor_arguments>)` can only be called in another constructor. 
+- As an instance, `this` can only be accessed within instance's members: variables, methods, and 
+inner class (needs to refer with `<outer_class_name.this>`).
+
+
+
+### Copy constructor
+- A constructor that takes a parameter of another instance of the same type, and assigns all 
+the new instance's fields with the argument's fields.
+
+
+
+### Call by Value vs Call by Reference
+- Java has only call by value mechanism, which is copying the values of variables into method arguments,
+*not* passing the memory addresses of the variables themselves.
+
+
+
 ### Access Modifier
 ### static vs instance
