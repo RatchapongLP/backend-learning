@@ -429,5 +429,17 @@ For such operations, use an Iterator explicitly instead.
 
 
 
+### `null` exactly
+- The `null` expression that belong to a special *null* type, which has no name. 
+- Because the *null* type has no name, it is impossible to declare a variable of the *null* type 
+or to cast to the *null* type. 
+- The `null` reference is the only possible value of an expression of *null* type. 
+- The `null` reference can always be cast to any reference type. 
+- In practice, the programmer can just pretend that `null` is merely a special literal that can 
+be of any reference type.
+- See more on `null` at this [Stack Overflow thread](https://stackoverflow.com/a/2707333)
+
+
+
 ### Access Modifier
 ### static vs instance
