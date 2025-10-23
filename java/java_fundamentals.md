@@ -469,5 +469,81 @@ the new instance's fields with the argument's fields.
 
 
 
+### Nested Classes
+#### Static inner class
+- Instantiating an inner class as 
+```
+Outer.Inner inner = new Outer.Inner();
+```
+
+#### Inner Class
+- Instantiating an inner class as
+```
+Outer outer = new Outer();
+Outer.Inner inner = outer.new Inner();
+```
+- Inner object can access members of the enclosing class object - `outer`.
+
+#### Local Class
+- Is a class inside any block: if, loop, method, etc.
+- A local class can access local variables and parameters of the enclosing block that are 
+final or *effectively final*. A variable or parameter whose value is never changed after its initialization 
+is effectively final.
+```
+public static void main(String[] args) {
+    int i = 10;
+    
+    class Foo {
+        int x = i;
+    }
+    
+    // i = 20; // This is not allowed as it will make 'i' not effectively final.
+}
+```
+- Since Java SE 8, if you declare the local class in a method, it can access the method's parameters.
+
+#### Anonymous Class
+- Enable declaration and instantiation of a class at the same time. 
+- Similar to local classes, but do not have a name. 
+- Use them if you need to use a local class only once.
+- While local classes are class declarations, anonymous classes are expressions, must be part of a statement.
+- See this example from [Oracle Tutorial](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)
+```
+public class HelloWorldAnonymousClasses {
+  
+    interface HelloWorld {
+        public void greet();
+        public void greetSomeone(String someone);
+    }
+  
+    public void sayHello() {
+        HelloWorld spanishGreeting = new HelloWorld() { // Anonymous class declaration and instantiation
+            String name = "mundo";
+            public void greet() {
+                greetSomeone("mundo");
+            }
+            public void greetSomeone(String someone) {
+                name = someone;
+                System.out.println("Hola, " + name);
+            }
+        };
+        spanishGreeting.greet();
+    }
+
+    public static void main(String... args) {
+        HelloWorldAnonymousClasses myApp =
+            new HelloWorldAnonymousClasses();
+        myApp.sayHello();
+    }            
+}
+```
+- The anonymous class expression consists of the following:
+  1. The new operator 
+  2. The name of an interface to implement or a class to extend.  
+  3. Parentheses that contain the arguments to a constructor, just like a normal class instantiation. 
+     <br>**Note:** When implementing an interface, there is no constructor, so an empty pair of parentheses is used.
+
+
+
 ### Access Modifier
 ### static vs instance
