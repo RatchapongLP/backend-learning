@@ -267,6 +267,34 @@ later when the variable is instantiated or initialized.
 
 
 
+### Expressions, Statements, and Blocks
+#### Statements
+- Controls the sequence of execution of a program, which are 
+- Executed for their effect and *do not* have values.
+- Some statements contain other statements.
+- Some statements contain expressions.
+- E.g., `if`, `assert`, `switch`, `while`, `do`, `for`, `break`, `continue`, `return`, `throw`, 
+`synchronized`, `try`, block (inside a method only)
+- **Abrupt of completion**: the `break`, `yield`, `continue`, `return` statements and an exception thrown
+cause a transfer of control that may prevent normal completion of expressions, statements, and blocks.
+
+#### Blocks
+- A *block* consists of a pair of curly braces which might or might not contain *block statements* 
+```
+Block:
+{ {BlockStatement} }
+```
+- A *block statement* consists of statements, local variable declarations, and local class and interface declarations within braces.
+```
+BlockStatement:
+  LocalVariableDeclarationStatement
+  ClassDeclaration
+  Statement
+```
+- E.g., method body, constructor body, initializer, block inside method body
+
+
+
 ### Operators
 #### Arithmetic Operators
 - Binary Arithmetic Operators (require two operands): `+`, `-`, `*`, `/`, and `%`
@@ -483,6 +511,7 @@ Outer outer = new Outer();
 Outer.Inner inner = outer.new Inner();
 ```
 - Inner object can access members of the enclosing class object - `outer`.
+- Cannot define any static members itself, because an inner class is associated with an outer instance.
 
 #### Local Class
 - Is a class inside any block: if, loop, method, etc.
