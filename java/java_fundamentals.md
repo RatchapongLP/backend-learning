@@ -269,7 +269,7 @@ later when the variable is instantiated or initialized.
 
 ### Expressions, Statements, and Blocks
 #### Statements
-- Controls the sequence of execution of a program, which are 
+- Controls the sequence of execution of a program.
 - Executed for their effect and *do not* have values.
 - Some statements contain other statements.
 - Some statements contain expressions.
@@ -511,7 +511,6 @@ Outer outer = new Outer();
 Outer.Inner inner = outer.new Inner();
 ```
 - Inner object can access members of the enclosing class object - `outer`.
-- Cannot define any static members itself, because an inner class is associated with an outer instance.
 
 #### Local Class
 - Is a class inside any block: if, loop, method, etc.
@@ -571,6 +570,17 @@ public class HelloWorldAnonymousClasses {
   2. The name of an interface to implement or a class to extend.  
   3. Parentheses that contain the arguments to a constructor, just like a normal class instantiation. 
      <br>**Note:** When implementing an interface, there is no constructor, so an empty pair of parentheses is used.
+
+
+
+### Class Inherence
+- Subclass cannot have a method with the same name and parameters as the superclass' but with:
+  - Weaker access modifier
+  - Different return type
+- Subclass' instantiation involves calling the superclass' constructor first, with two different cases:
+  - If the invoked subclass' constructor does not call any of superclass' constructor explicitly, 
+  the no-args constructor of the superclass will get called.
+  - If the invoked subclass' constructor calls a superclass' constructor explicitly, then it's straightforward.
 
 
 
