@@ -602,5 +602,15 @@ already does the job otherwise.*
 
 
 
+### interface
+- *Variables* declared in an interface are implicitly `public`, `static`, and `final`.
+- *Initializer blocks* are not allowed in an interface.
+- *Non-default methods* declared in an interface are implicitly `public` and `abstract`.
+- *Default methods* declared in an interface are implicitly `public` and non-`static`.
+- *Static methods* declared in an interface are implicitly `public` and *need* bodies.
+- 
+
+
+
 ### Access Modifier
 ### static vs instance
