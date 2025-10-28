@@ -1,4 +1,4 @@
-# Java: Additional Tips to Koushik's course - Java Essentials
+# Java: Additional Notes and Tips to Koushik's course - [Java Essentials](https://www.youtube.com/watch?v=M3i0A2RoECo&list=PLqq-6Pq4lTTYSqRzWc0AJfL9Bza6kdj9V)
 
 ## General Facts
 - First version released in $1995$
