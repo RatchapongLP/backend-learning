@@ -1,4 +1,4 @@
-# Java
+# Java: Additional Tips to Koushik's course - Java Essentials
 
 ## General Facts
 - First version released in $1995$
