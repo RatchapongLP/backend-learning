@@ -575,12 +575,30 @@ public class HelloWorldAnonymousClasses {
 
 ### Class Inherence
 - Subclass cannot have a method with the same name and parameters as the superclass' but with:
-  - Weaker access modifier
+  - Weaker-privilege access modifier
   - Different return type
 - Subclass' instantiation involves calling the superclass' constructor first, with two different cases:
   - If the invoked subclass' constructor does not call any of superclass' constructor explicitly, 
   the no-args constructor of the superclass will get called.
   - If the invoked subclass' constructor calls a superclass' constructor explicitly, then it's straightforward.
+
+
+
+### `final`
+- Before Java 17, `final` can be used at a class declaration to prevent extensions.
+- Can be used at variables declaration to prohibit re-assignments.
+- Can be used at methods declaration to prevent overriding by subclasses.
+
+
+### Sealed Class
+- `sealed` evolved from `final` on classes, enabling and requiring further inheritance.
+- `sealed` classes must have declared `permits` listing at least one subclass. *Why? Because the `final`
+already does the job otherwise.*
+- The subclasses of the sealed class must be declared with one of the three following keywords: 
+`final`, `sealed`, and `non-sealed`.
+  #### Tips
+- `final` is allowed on every classes.
+- `non-sealed` is not allowed on classes that do not have a sealed superclass.
 
 
 
