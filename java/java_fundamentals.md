@@ -605,10 +605,16 @@ already does the job otherwise.*
 ### interface
 - *Variables* declared in an interface are implicitly `public`, `static`, and `final`.
 - *Initializer blocks* are not allowed in an interface.
-- *Non-default methods* declared in an interface are implicitly `public` and `abstract`.
-- *Default methods* declared in an interface are implicitly `public` and non-`static`.
-- *Static methods* declared in an interface are implicitly `public` and *need* bodies.
-- 
+- *Non-default methods* declared in an interface are implicitly `public` and `abstract`. (`protected` not allowed)
+- *Default methods* declared in an interface are implicitly `public` and non-`static`. (`protected` and `private` not allowed)
+- *Static methods* declared in an interface are implicitly `public` and *need* bodies. (`protected` not allowed)
+- `private` non-default methods and `private` static methods are allowed.
+#### Default Methods Clash
+- A class implementing more than one interfaces that have default methods with the same method signature.
+  1. If the methods have the same return type, the class needs to override the particular methods.
+    However, it can call methods of the interface using `<interface_name>.super.<method_call>`.
+  2. If the methods have different return types, the code will not compile, saying that the implemented
+    interfaces have clashing methods.
 
 
 
