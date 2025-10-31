@@ -642,5 +642,17 @@ already does the job otherwise.*
 
 
 
+### Generic
+- Built for compile time type checking.
+- Parameter type or argument type does not exist in bytecode.
+#### Type Erasure
+  - Compiler replaces the type parameters:
+    - Unbounded type parameters are replaced with `Object`, e.g. `List<String>` becomes `List<Object>`
+    - Bounded type parameters are replaced with its first bound. e.g. `T extends Comparable<T>` becomes `Comparable`
+  - Inserts necessary type casts to ensure type safety.
+  - No runtime specific type arguments of a generic type at runtime, e.g., `list instanceof List<String>` is not allowed.
+  - Cannot create new instances of a type parameter directly, e.g., `new T()`.
+
+
 ### Access Modifier
 ### static vs instance
