@@ -650,3 +650,18 @@ already does the job otherwise.*
 - Usually indicate issues with the JVM or the environment.
 - Designed for logging the issue and terminating the program, not handling.
 - Examples: `OutOfMemoryError`, `StackOverflowError`, `NoClassDefFoundError`.
+
+
+
+### Type Casting
+- Performed by compiler.
+#### Implicit (Automatic) Casting
+- Also known as widening or upcasting.
+- Assigning a smaller data type to a larger data type.
+- Safe and not data losable.
+- Examples: `int` to `double`, `long` to `float`, `String` to `Object`.
+#### Explicit (Manual) Casting
+- Also known as narrowing or down casting.
+- Converting a larger data type to a smaller type.
+- Can lead to data loss.
+- Examples: `double` to `int`.
