@@ -304,6 +304,10 @@ BlockStatement:
 #### The Equality and Relational Operators
 - `==`, `!=`, `>`, `>=`, `<`, and `<=`
 - `instanceof` - type comparison operator  (`null` is not an instance of any types)
+##### `instanceof`
+- Syntax: `<object_variable> instanceof <class_name>`, evaluates to `boolean`
+- Tests the actual runtime type of objects.
+- Never causes a cast.
 
 #### The Conditional Operators
 - `&&`, `||`, and `?:`
@@ -454,6 +458,13 @@ for (Type elementVariable : iterableOrArray) {
 - Internally uses an `Iterator` for `Iterable` objects.
 - Does not allow modifying the `Collection` object during iteration, or else it throws `ConcurrentModificationException`. 
 For such operations, use an Iterator explicitly instead.
+
+
+
+### `var`
+- Used for local variable declaration only.
+- Compiler will infer the type of the variable from its initializer.
+- The bytecode will contain the fully resolved, explicit type information.
 
 
 
