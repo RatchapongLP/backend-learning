@@ -277,6 +277,24 @@ type of the initializer expression assigned to the variable.
 
 - Literals: `true` and `false`
 
+### Number Literals Summary
+- Integer Literals only have `int` and `long` types:
+  - Decimal: `0`, `1101`, `1_123_456_711_123L`
+  - Octal: `00`, `01`, `010`
+  - Binary: `0b0`, `0b1010`, `0b10_1010`, `0b1111_1111_1111_1111_1111_1111_1111_1111L`
+  - Hexadecimal: `0x0`, `0xFF`, `0x7fff_ffff`
+- Floating-Point Literals only have `float` and `double` types:
+  - Decimal: `0.0`, `1230.12`, `1_230.12_34F`, `1.23E3`
+  - Hexadecimal (cast): `0x0`, `0x0f`, `0x0dF`
+- Assigning integer literals to `byte` and `short` only need casting *when* the literal values *exceed* the type's capacity.
+  ```
+  byte b = 10; // No casting needed
+  short s = 1000; // No casting needed
+  
+  byte b = (byte) 128; // Needs casting, get b = -128
+  short s = (short) -32769 // Needs casting, get s = 32767
+  ```
+
 ### Strongly static typing
 - The declared variable's type and the assigned value's type should be *compatible*.
 
