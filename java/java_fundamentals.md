@@ -856,4 +856,17 @@ already does the job otherwise.*
 
 - Can lead to data loss.
 
-- Examples: `double` to `int`.
+- For reference types, converting a superclass type to a subclass type demands that the actual object
+is an instance of the subclass or the subclass' inheritor, or else `java.lang.ClassCastException`.
+
+- Examples: `double` to `int`, `Number` to `Integer`.
+  ```
+    jshell> Object obj = 1.9
+    obj ==> 1.9
+    
+    jshell> Number num = (Number) obj
+    num ==> 1.9
+    
+    jshell> Double d = (Double) obj
+    d ==> 1.9
+  ```
