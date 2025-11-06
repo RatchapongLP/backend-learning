@@ -283,16 +283,58 @@ type of the initializer expression assigned to the variable.
   - Octal: `00`, `01`, `010`
   - Binary: `0b0`, `0b1010`, `0b10_1010`, `0b1111_1111_1111_1111_1111_1111_1111_1111L`
   - Hexadecimal: `0x0`, `0xFF`, `0x7fff_ffff`
+  
 - Floating-Point Literals only have `float` and `double` types:
   - Decimal: `0.0`, `1230.12`, `1_230.12_34F`, `1.23E3`
   - Hexadecimal (cast): `0x0`, `0x0f`, `0x0dF`
+  
 - Assigning integer literals to `byte` and `short` only need casting *when* the literal values *exceed* the type's capacity.
   ```
-  byte b = 10; // No casting needed
-  short s = 1000; // No casting needed
+    byte b = 10; // No casting needed
+    short s = 1000; // No casting needed
+    
+    byte b = (byte) 128; // Needs casting, get b = -128
+    short s = (short) -32769 // Needs casting, get s = 32767
+  ```
   
-  byte b = (byte) 128; // Needs casting, get b = -128
-  short s = (short) -32769 // Needs casting, get s = 32767
+- Assigning character literals to number primitive types only need casting *when* the literal values *exceed* the type's capacity,
+  and vice versa.
+  ```
+    jshell> byte b = 'a'
+    b ==> 97
+    
+    jshell> char c = 0b110_0001
+    c ==> 'a'
+    
+    jshell> int i = '\uffff'
+    i ==> 65535
+    
+    jshell> float f = '\uffff'
+    f ==> 65535.0
+    
+    jshell> double d = '\uffff'
+    d ==> 65535.0
+  
+    jshell> char c = -65536 + 97
+    |  Error:
+    |  incompatible types: possible lossy conversion from int to char
+    |  char c = -65536 + 97;
+    |           ^---------^
+    
+    jshell> char c = (char) (-65536 + 97)
+    c ==> 'a'
+  
+    jshell> byte b = '\u0080'
+    |  Error:
+    |  incompatible types: possible lossy conversion from char to byte
+    |  byte b = '\u0080';
+    |           ^------^
+    
+    jshell> byte b = (byte) '\u0080'
+    b ==> -128
+    
+    jshell> int i = '\u0080'
+    i ==> 128
   ```
 
 ### Strongly static typing
