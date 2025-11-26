@@ -19,6 +19,18 @@
 - Transitivity: For any non-null reference values `x`, `y`, and `z`, if `x.equals(y)` returns `true` and `y.equals(z)` returns `true`, then `x.equals(z)` should return `true`.
 - Consistency: For any non-null reference values `x` and `y`, multiple invocations of `x.equals(y)` should consistently return `true` or consistently return `false`, provided no information used in `equals` comparisons on the objects is modified.
 - Non-nullity: For any non-null reference value `x`, `x.equals(null)` should return `false`.
+- For properties equality checking of the object, they need not satisfy non-nullity if certain properties can be null.
+- Example:
+```java
+@Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    MyClass other = (MyClass) obj;
+    return Objects.equals(this.property1, other.property1) &&
+            this.id == other.id;
+}
+```
 
 ## `Arrays.asList()`
 - ***Fixed-size List:***
