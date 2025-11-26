@@ -1,4 +1,17 @@
 # Collections
+- All types of collections extends from the `Collection` interface in Java, except for `Map`.
+- All collections are generic types.
+
+## `Collection` interface
+- The root interface in the collection hierarchy.
+- Extends `Iterable` interface.
+- Defines basic methods for adding, removing, and checking elements in a collection.
+- Commonly used subinterfaces:
+    - `List`: An ordered collection (also known as a sequence) that allows duplicate elements.
+    - `Set`: A collection that does not allow duplicate elements.
+    - `Queue`: A collection designed for holding elements prior to processing, typically in a FIFO manner.
+    - `Deque`: A double-ended queue that allows insertion and removal of elements from both ends.
+- For `add`, some implementations may throw `UnsupportedOperationException` if the collection is unmodifiable.
 
 ## `Arrays.asList()`
 - ***Fixed-size List:***
