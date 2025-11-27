@@ -32,6 +32,20 @@ public boolean equals(Object obj) {
 }
 ```
 
+## `hashCode()`
+- Consistency: The `hashCode` method must consistently return the same integer value, provided that the object is not modified in a way that affects `equals` comparisons.  
+  This must hold:
+> a.equals(b) == true → a.hashCode() == b.hashCode()
+- Unequal objects can have the same hash code, but the reverse is not true. Because hash collisions can occur when different objects produce the same hash code.  
+  This does ***not*** necessarily hold:
+> a.hashCode() == b.hashCode() → a.equals(b) == true  
+
+So collections like HashMap or HashSet rely on:
+1. hashCode() → group objects into buckets
+2. equals() → precisely check whether two objects are equal inside the bucket
+  
+
+
 ## `Arrays.asList()`
 - ***Fixed-size List:***
     Because `Arrays.asList()` is 
