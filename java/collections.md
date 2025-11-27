@@ -31,6 +31,7 @@ public boolean equals(Object obj) {
             this.id == other.id;
 }
 ```
+- By default, any `Object` uses reference equality (i.e., `==` operator) for `equals()` method.
 
 ## `hashCode()`
 - Consistency: The `hashCode` method must consistently return the same integer value, provided that the object is not modified in a way that affects `equals` comparisons.  
@@ -42,7 +43,11 @@ public boolean equals(Object obj) {
 
 So collections like HashMap or HashSet rely on:
 1. hashCode() → group objects into buckets
-2. equals() → precisely check whether two objects are equal inside the bucket
+2. equals() → precisely check whether two objects are equal inside the bucket.
+
+- By default, The Object.hashCode() method is a native method, which returns distinct integers for distinct objects. 
+(This is typically implemented by converting the internal address of the object into an integer, 
+but this implementation technique is not required by the JavaTM programming language.)
   
 
 
