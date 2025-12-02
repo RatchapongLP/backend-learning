@@ -49,7 +49,21 @@ So collections like HashMap or HashSet rely on:
 (This is typically implemented by converting the internal address of the object into an integer, 
 but this implementation technique is not required by the JavaTM programming language.)
   
+- `Objects` class provides hashing utility methods:
 
+    - `Objects.hash(Object... values)`: 
+  
+      - Generates a hash code for a sequence of input values.
+      - Uses Arrays.hashCode(Object[] a) internally, which implements in the same way as `List.hashCode()`.
+      ```java
+      int hashCode = 1;
+      for (E e : list)
+        hashCode = 31 * hashCode + (e == null ? 0 : e.hashCode());
+      ```
+      
+    - `Objects.hashCode(Object o)`: 
+      - Returns the hash code of the given object, or 0 if the object is null.
+      - Calls `o.hashCode()` under the hood if `o` is not null.
 
 ## `Arrays.asList()`
 - ***Fixed-size List:***
