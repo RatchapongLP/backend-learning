@@ -23,3 +23,8 @@ git commit --amend -m "new commit message"
 ```
 git rm -r --cached <files>
 ```
+
+- Edit remote URL
+```
+git remote set-url origin <new_url>
+```
