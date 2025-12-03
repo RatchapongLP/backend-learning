@@ -65,6 +65,43 @@ but this implementation technique is not required by the JavaTM programming lang
       - Returns the hash code of the given object, or 0 if the object is null.
       - Calls `o.hashCode()` under the hood if `o` is not null.
 
+## `Comparable`
+- An interface that defines a natural ordering for objects of a class.
+- Contains the method `compareTo(T o)`, which compares the current object with the specified object.
+- The `compareTo` method returns:
+    - A negative integer if the current object is less than the specified object.
+    - Zero if the current object is equal to the specified object.
+    - A positive integer if the current object is greater than the specified object.
+- Classes that implement `Comparable` can be sorted using sorting algorithms or data structures that rely on natural ordering (e.g., `TreeSet`, `TreeMap`).
+- Example:
+```java
+public class MyClass implements Comparable<MyClass> {
+    private int value;
+    public MyClass(int value) {
+        this.value = value;
+    }
+    @Override
+    public int compareTo(MyClass other) {
+        return Integer.compare(this.value, other.value);
+    }
+}
+```
+
+## `Comparator`
+- An interface that defines a custom ordering for objects of a class.
+- Contains the method `compare(T o1, T o2)`, which compares two objects.
+- The `compare` method returns the same results as `compareTo`.
+- `Comparator` can be used to define multiple orderings for a class, unlike `Comparable`, which defines a single natural ordering.
+- Example:
+```java
+public class MyClassComparator implements Comparator<MyClass> {
+    @Override
+    public int compare(MyClass o1, MyClass o2) {
+        return Integer.compare(o1.getValue(), o2.getValue());
+    }
+}
+```
+
 ## `Arrays.asList()`
 - ***Fixed-size List:***
     Because `Arrays.asList()` is 
