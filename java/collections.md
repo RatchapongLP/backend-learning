@@ -65,7 +65,7 @@ but this implementation technique is not required by the JavaTM programming lang
       - Returns the hash code of the given object, or 0 if the object is null.
       - Calls `o.hashCode()` under the hood if `o` is not null.
 
-## `Comparable`
+## `Comparable<T>`
 - An interface that defines a natural ordering for objects of a class.
 - Contains the method `compareTo(T o)`, which compares the current object with the specified object.
 - The `compareTo` method returns:
@@ -87,7 +87,7 @@ public class MyClass implements Comparable<MyClass> {
 }
 ```
 
-## `Comparator`
+## `Comparator<T>`
 - An interface that defines a custom ordering for objects of a class.
 - Contains the method `compare(T o1, T o2)`, which compares two objects.
 - The `compare` method returns the same results as `compareTo`.
@@ -101,6 +101,20 @@ public class MyClassComparator implements Comparator<MyClass> {
     }
 }
 ```
+
+## `Iterable<T>` interface
+- The root interface for all iterable collections in Java.
+- Defines the method `iterator()`, which returns an `Iterator` over elements of type `T`.
+- Allows the use of enhanced for-loops (for-each loops) to iterate over collections.
+```java
+for (T element : collection) {
+    System.out.println(element);
+}
+```
+- **fail-fast iterator**: 
+    - If the collection is modified structurally, e.g., adding or removing elements, *after* the iterator is created, 
+    the iterator will throw a `ConcurrentModificationException` on the next `iterator.next()`.
+    - This behavior comes from the `modCount` field in collection implementations, an internal modification counter.
 
 ## `Arrays.asList()`
 - ***Fixed-size List:***
