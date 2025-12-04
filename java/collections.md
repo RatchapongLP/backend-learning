@@ -113,8 +113,38 @@ for (T element : collection) {
 ```
 - **fail-fast iterator**: 
     - If the collection is modified structurally, e.g., adding or removing elements, *after* the iterator is created, 
-    the iterator will throw a `ConcurrentModificationException` on the next `iterator.next()`.
+    the iterator will throw a `ConcurrentModificationException` on the next `iterator.next()` on a best-effort basis.
     - This behavior comes from the `modCount` field in collection implementations, an internal modification counter.
+
+## `List<T>`
+- An ordered collection (also known as a sequence)
+- Allows duplicate elements.
+- Typically allows multiple null elements if allows null elements at all.
+- Common implementations: `ArrayList`, `LinkedList`, `Vector`, `Stack`, `CopyOnWriteArrayList`.
+- Supports iteration in the order of insertion and also reverse iteration.
+- Methods:
+    - `add(int index, T element)`: Inserts the specified element at the specified position, *shifts all the subsequent elements to the right8.
+    - `remove(int index)`: Removes the element at the specified position, *shifts any subsequent elements to the left*.
+    - `indexOf(Object o)`: Returns the index of the first occurrence of the specified element, or -1 if not found.
+
+### `ArrayList<T>`
+- A resizable array implementation of the `List` interface.
+- Used an array under the hood.
+- Provides $O(1)$ time complexity for add, get, set, etc. on general. 
+- Provides amortized constant time complexity for `add(T element)` operation.
+
+### `LinkedList<T>`
+- A doubly-linked list implementation of the `List` and `Deque` interfaces.
+- Each element (node) contains a reference to the previous and next node.
+- Provides $O(n)$ time complexity for add, get, set, etc. on general.
+- Provides $O(1)$ for appending and removing at the end of the list,
+
+### `Vector<T>`
+- Exists since Java 1.0, before the introduction of the Collections Framework in Java 2 (Java 1.2).
+- A synchronized (thread-safe) implementation of the `List` interface.
+- Similar to `ArrayList`, but with synchronized methods.
+- Generally slower than `ArrayList` due to synchronization overhead.
+- For multi-threaded environments, consider using `Collections.synchronizedList()` or `CopyOnWriteArrayList` instead.
 
 ## `Arrays.asList()`
 - ***Fixed-size List:***
