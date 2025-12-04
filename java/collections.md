@@ -146,6 +146,15 @@ for (T element : collection) {
 - Generally slower than `ArrayList` due to synchronization overhead.
 - For multi-threaded environments, consider using `Collections.synchronizedList()` or `CopyOnWriteArrayList` instead.
 
+### `CopyOnWriteArrayList<T>`
+- A thread-safe variant of `ArrayList`.
+- **Copy-on-Write** Strategy: When any modifying operation (like add, set, or remove) occurs, a new copy of 
+the underlying array is created. The modification is performed on this new copy, and then the internal 
+reference to the array is updated to point to the new, modified copy. 
+- Writings can be expensive, especially with large lists
+- Read operations do not require any locking and operate on a stable, immutable array.
+- Suitable for read-intensive scenarios: When a list is primarily read and rarely modified.
+
 ### `List<E>` creation from array
 - Using `Arrays.asList()`:
 ```java
