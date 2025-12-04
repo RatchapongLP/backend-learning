@@ -146,32 +146,50 @@ for (T element : collection) {
 - Generally slower than `ArrayList` due to synchronization overhead.
 - For multi-threaded environments, consider using `Collections.synchronizedList()` or `CopyOnWriteArrayList` instead.
 
-## `Arrays.asList()`
-- ***Fixed-size List:***
-    Because `Arrays.asList()` is 
-***backed by the original array***. This means you cannot add or remove elements from this List, 
-as these operations would change the size, which is not allowed for an array-backed List. 
-Attempting to do so will result in an `UnsupportedOperationException`.
- 
-- ***Backed by the original array:***
-    Any modifications made to the elements of the returned List will directly reflect in 
-the original array, and vice versa. This is because the List is a view of the array, not a separate copy.
-
-- ***Allows null values:***
-    Unlike `List.of()`, `Arrays.asList()` permits null values within the array and consequently 
-within the returned List.
-
+### `List<E>` creation from array
+- Using `Arrays.asList()`:
+```java
+String[] array = {"A", "B", "C"};
+List<String> list1 = Arrays.asList(array);
+```
+- The returned list is fixed-size and backed by the original array.
+- Can do everything that an array *can* do and *cannot*.
+- Any modifications made to the elements of the returned List will directly reflect in
+  the original array, and vice versa.
+- Permits null values within the array.
 - ***Handles primitive arrays differently:***
-    When used with an array of primitive types (e.g., `int[]`, `char[]`), Arrays.asList() treats 
-the entire primitive array as a single element, creating a List containing only one element, 
-which is the primitive array itself. To create a List of individual primitive values, you need 
-to use wrapper classes (e.g., `Integer[]` instead of `int[]`).
+  When used with an array of primitive types (e.g., `int[]`, `char[]`), Arrays.asList() treats
+  the entire primitive array as a single element, creating a List containing only one element,
+  which is the primitive array itself. To create a List of individual primitive values, you need
+  to use wrapper classes (e.g., `Integer[]` instead of `int[]`).
 ```
     Arrays.asList(new int[]{1, 2, 3}); // This gives a List of one element: [{1, 2, 3}]
     Arrays.asList(new Integer[]{1, 2, 3}); // This gives a List of elements: [1, 2, 3]
 ```
-## `Arrays.asList()` vs `List.of()`
+
+- Using `List.of()` (Java 9+):
+```java
+String[] array = {"A", "B", "C"};
+List<String> list2 = List.of(array);
+```
+- The returned list is a shallow, unmodifiable copy of the input array.
+
+### `Arrays.asList()` vs `List.of()`
 A practical summary of an answer in a [Stack Overflow thread](https://stackoverflow.com/questions/46579074/what-is-the-difference-between-list-of-and-arrays-aslist):
 
 [//]: # (<img src="images/arrays_aslist_vs_list_of.jpg" width="450">)
 ![](images/arrays_aslist_vs_list_of.jpg)
+
+### `List<E>` creation from another collection
+
+- Using `new ArrayList<>(Collection<? extends E> c)`:
+```java
+List<String> list3 = new ArrayList<>(list2);
+```
+- The returned list is a shallow, modifiable copy of the input list.
+
+- Using `List.copyOf(Collection<? extends E> c)` (Java 10+):
+```java
+List<String> list4 = List.copyOf(list2);
+```
+- The returned list is a shallow, unmodifiable copy of the input list.
