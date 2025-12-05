@@ -121,7 +121,7 @@ for (T element : collection) {
 - Allows duplicate elements.
 - Typically allows multiple null elements if allows null elements at all.
 - Common implementations: `ArrayList`, `LinkedList`, `Vector`, `Stack`, `CopyOnWriteArrayList`.
-- Supports iteration in the order of insertion and also reverse iteration.
+- Supports bidirectional iteration.
 - Methods:
     - `add(int index, T element)`: Inserts the specified element at the specified position, *shifts all the subsequent elements to the right8.
     - `remove(int index)`: Removes the element at the specified position, *shifts any subsequent elements to the left*.
@@ -202,3 +202,26 @@ List<String> list3 = new ArrayList<>(list2);
 List<String> list4 = List.copyOf(list2);
 ```
 - The returned list is a shallow, unmodifiable copy of the input list.
+
+### `ListIterator<T>`
+- An iterator for lists that allows bidirectional traversal.
+- Extends the `Iterator<T>` interface.
+- Introduces cursor concept to indicate the position between elements in the list.
+  ```
+                       Element(0)   Element(1)   Element(2)   ... Element(n-1)
+  cursor positions:  ^            ^            ^            ^                  ^
+  ```
+- Provides additional element modification methods:
+  - `void add(T e)`: Inserts the specified element into the list (optional operation). 
+  The new element is inserted **immediately before** the implicit cursor: a subsequent call to next would be unaffected, and a subsequent call to previous would return the new element.
+  ```
+  Before add(T e):
+                       Element(0)   Element(1)   Element(2)   ... Element(n-1)
+  cursor positions:                            ^
+  
+  After add(New Element):
+                       Element(0)   Element(1)   New Element   Element(2)   ... Element(n-1)
+  cursor positions:                                          ^                              
+  ```
+  
+  - `void set(T e)`: Replaces the last element returned by next or previous with the specified element (optional operation).
