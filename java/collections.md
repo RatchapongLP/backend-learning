@@ -122,6 +122,7 @@ for (T element : collection) {
 - Typically allows multiple null elements if allows null elements at all.
 - Common implementations: `ArrayList`, `LinkedList`, `Vector`, `Stack`, `CopyOnWriteArrayList`.
 - Supports bidirectional iteration.
+- `equals()` returns true if and only if the two lists have the same size and corresponding elements are equal (they can be `null`).
 - Methods:
     - `add(int index, T element)`: Inserts the specified element at the specified position, *shifts all the subsequent elements to the right8.
     - `remove(int index)`: Removes the element at the specified position, *shifts any subsequent elements to the left*.
@@ -211,6 +212,8 @@ List<String> list4 = List.copyOf(list2);
                        Element(0)   Element(1)   Element(2)   ... Element(n-1)
   cursor positions:  ^            ^            ^            ^                  ^
   ```
+- Better than normal for-loop when modifying LinkedLists during traversal, since no additional traversal is needed.
+- Offers simpler and safer way to modify the list during traversal compared to index handling in normal for-loop.
 - Provides additional element modification methods:
   - `void add(T e)`: Inserts the specified element into the list (optional operation). 
   The new element is inserted **immediately before** the implicit cursor: a subsequent call to next would be unaffected, and a subsequent call to previous would return the new element.
@@ -236,7 +239,6 @@ List<String> list4 = List.copyOf(list2);
   }
   ```
   
-  
   - `void set(T e)`: Replaces the last element returned by next or previous with the specified element (optional operation).
     - Can only be called (albeit multiple times) if neither `remove()` nor `add(E)` have been called after the last call to next or previous.
     - Why? 
@@ -256,3 +258,7 @@ List<String> list4 = List.copyOf(list2);
     - Why? It would complicate the design of the iterator, since after an add(), more variations of remove() are needed
     to accommodate the desired number of indexes of elements to remove, breaking the *iterator concept* of simplicity.
   
+### `SubList<E>`
+- A view of a portion of a `List`, backed by the original list.
+- Created using `list.subList(int fromIndex, int toIndex)` method.
+
