@@ -219,9 +219,27 @@ List<String> list4 = List.copyOf(list2);
                        Element(0)   Element(1)   Element(2)   ... Element(n-1)
   cursor positions:                            ^
   
-  After add(New Element):
-                       Element(0)   Element(1)   New Element   Element(2)   ... Element(n-1)
-  cursor positions:                                          ^                              
+  After add(T e):
+                       Element(0)   Element(1)   [e]   Element(2)   ... Element(n-1)
+  cursor positions:                                  ^                              
   ```
   
   - `void set(T e)`: Replaces the last element returned by next or previous with the specified element (optional operation).
+    - Can only be called (albeit multiple times) if neither `remove()` nor `add(E)` have been called after the last call to next or previous.
+    - Why? 
+      - remove() can possibly empty the list, leaving nothing to set.
+      - If *only one* add() is allowed after next()/previous(), it would be equivalent to set() itself, making it redundant.
+      - After with multiple add()'s, an index of the target element to set is needed,
+      impairing the simplicity of the iterator, since set() is probably designed in *iterator concept*, to modify 
+      one element at a time along the traverse (at each next()/previous()).
+
+  - `void remove()`: Removes from the list the last element that was returned by next or previous (optional operation).
+  
+    - Can only be called once per next or previous. 
+    - Why? To remove something, we must make sure that there is actually something there. Allowing calling multiple times until 
+      the list is empty does not make sense since the iterator already offers `hasNext()` that signal the end of traverse.
+    
+    - It can be made only if add(E) has not been called after the last call to next or previous.
+    - Why? It would complicate the design of the iterator, since after an add(), more variations of remove() are needed
+    to accommodate the desired number of indexes of elements to remove, breaking the *iterator concept* of simplicity.
+  
