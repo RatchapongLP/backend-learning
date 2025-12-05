@@ -262,3 +262,9 @@ List<String> list4 = List.copyOf(list2);
 - A view of a portion of a `List`, backed by the original list.
 - Created using `list.subList(int fromIndex, int toIndex)` method.
 
+## `Set<T>`
+- A collection that does not allow duplicate elements, as defined by the `equals()` method of the element's type.
+- Allows at most one null element.
+- Does not have additional methods beyond those defined in the `Collection` interface.
+- Common implementations: `HashSet`, `LinkedHashSet`, `TreeSet`, `CopyOnWriteArraySet`.
+- The implementations' constructors can take another collection as an argument to initialize the set, while *eliminating duplicates*.
