@@ -223,6 +223,19 @@ List<String> list4 = List.copyOf(list2);
                        Element(0)   Element(1)   [e]   Element(2)   ... Element(n-1)
   cursor positions:                                  ^                              
   ```
+  - Why? To make sure that forward traversal is safe from infinite loop after an add() operation
+  without needing extra handling.
+  ```java
+  ListIterator<String> iterator = list.listIterator();
+  while (iterator.hasNext()) {
+      String element = iterator.next();
+      if (someCondition(element)) {
+          iterator.add("newElement"); 
+          // iterator.next(); // Don't need this extra handling, don't do it.
+      }
+  }
+  ```
+  
   
   - `void set(T e)`: Replaces the last element returned by next or previous with the specified element (optional operation).
     - Can only be called (albeit multiple times) if neither `remove()` nor `add(E)` have been called after the last call to next or previous.
