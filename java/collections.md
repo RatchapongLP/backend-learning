@@ -268,3 +268,18 @@ List<String> list4 = List.copyOf(list2);
 - Does not have additional methods beyond those defined in the `Collection` interface.
 - Common implementations: `HashSet`, `LinkedHashSet`, `TreeSet`, `CopyOnWriteArraySet`.
 - The implementations' constructors can take another collection as an argument to initialize the set, while *eliminating duplicates*.
+
+### Internal structure of `HashSet<T>`
+- Uses `HashMap` internally to store elements.
+- Each element in the `HashSet` is stored as a key in the underlying `HashMap`, with a constant dummy value.
+- This allows for efficient operations like add, remove, and contains, which have an average time complexity of $O(1)$.
+
+### Internal structure of `HashMap<K, V>`
+- Uses an array of buckets (also known as bins) to store key-value pairs.
+- Each bucket is a linked list or a balanced tree (since Java 8) of entries that hash to the same index (hash collision).
+- The index for a key is determined by computing the hash code of the key and mapping it to the array size using modulo operation.
+  ```
+  bucketIndex = hashCode % capacity.
+  ```
+- When the number of entries exceeds a certain threshold (load factor), the array is resized (doubled in size) to maintain efficient performance.
+- Provides average time complexity of $O(1)$ for add, remove, and get operations.
